@@ -39,15 +39,20 @@ class Algebra:
     #will return a list of all indexs where that symobol is pressent
     #it will return [] if that symbol is not in the equationList
     def DoseContainSymbol(self, symbolToSearchFor):
-        indexs = []
         for i in range(len(self.equationList)):
             if self.equationList[i] == symbolToSearchFor:
-                indexs.append(i)
-        return indexs
+                return i
+    
+    def Addition(self):
+        Indexs = self.DoseContainSymbol("+")
+        self.equationList[Indexs] = str(int(self.equationList[Indexs - 1]) + int(self.equationList[Indexs + 1]))
+        self.equationList.pop(Indexs + 1)
+        self.equationList.pop(Indexs - 1)
 
 
 a = Algebra("1 + 356 - 6")
 a.StringToList()
 a.RemoveSpace()
 a.SplitEquation()
+a.Addition()
 print(a.equationList)
