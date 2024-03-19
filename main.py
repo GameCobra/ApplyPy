@@ -22,8 +22,9 @@ class Algebra:
                 i -= 1
             i += 1
 
-    #Designed to be proceaded by the RemoveSpace function
+    #Designed to be proceaded after the RemoveSpace function
     #will combine adgasent numbers in the equationList var to be a single number in a single element
+    #NOTE: Add capability for negative numbers
     def SplitEquation(self):
         symbolsToLookFor = ["+", "-", "*", "/", "!", "=", "(", ")", "^"]
         newEquationList = [""]
@@ -43,16 +44,31 @@ class Algebra:
             if self.equationList[i] == symbolToSearchFor:
                 return i
     
+    def ConvertStringNumbersToInts(self):
+        pass
+        #for i in range(self.equationList)
+
+    #Gose through the EquationList to find the first "+" and adds the values on eather side of it
+    #Takes the combi ned value and replaces the 3 elements used with the new calculated value
     def Addition(self):
         Indexs = self.DoseContainSymbol("+")
         self.equationList[Indexs] = str(int(self.equationList[Indexs - 1]) + int(self.equationList[Indexs + 1]))
         self.equationList.pop(Indexs + 1)
         self.equationList.pop(Indexs - 1)
 
+    #Dose the same this as Addition
+    #finds the first instance of "-" and dose subtraction on the 2 elements on either side of it
+    def Subtraction(self):
+        Indexs = self.DoseContainSymbol("-")
+        self.equationList[Indexs] = str(int(self.equationList[Indexs - 1]) - int(self.equationList[Indexs + 1]))
+        self.equationList.pop(Indexs + 1)
+        self.equationList.pop(Indexs - 1)
 
-a = Algebra("1 + 356 - 6")
+
+a = Algebra("1 + 356 - 6 + 1")
 a.StringToList()
 a.RemoveSpace()
 a.SplitEquation()
 a.Addition()
+a.Subtraction()
 print(a.equationList)
