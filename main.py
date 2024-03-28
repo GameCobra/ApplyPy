@@ -86,6 +86,14 @@ class Algebra:
         self.equationList.pop(Indexs + 1)
         self.equationList.pop(Indexs - 1)
 
+    #Dose the same this as Addition
+    #finds the first instance of "^" and dose powers on the 2 elements on either side of it
+    def Exponents(self):
+        Indexs = self.DoseContainSymbol("^")
+        self.equationList[Indexs] = str(float(self.equationList[Indexs - 1]) ** float(self.equationList[Indexs + 1]))
+        self.equationList.pop(Indexs + 1)
+        self.equationList.pop(Indexs - 1)
+
     #Dose the multiplication and division portion of BEDMAS
     def MultAndDiv(self):
         nextMult = self.DoseContainSymbol("*")
@@ -120,10 +128,11 @@ class Algebra:
         return
 
 
-a = Algebra("7 + 2 * 10 - 6 / 2")
+a = Algebra("2 + 2^2 * 3 - 6 / 2")
 a.StringToList()
 a.RemoveSpace()
 a.SplitEquation()
+a.Exponents()
 a.MultAndDiv()
 a.AddAndSub()
 print(a.equationList)
