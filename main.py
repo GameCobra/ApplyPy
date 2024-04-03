@@ -44,6 +44,13 @@ class Algebra:
             if self.equationList[i] == symbolToSearchFor:
                 return i
         return -1
+    
+    def DoseContainSymbolList(self, symbolToSearchFor):
+        indexList = []
+        for i in range(len(self.equationList)):
+            if self.equationList[i] == symbolToSearchFor:
+                indexList.append(i)
+        return indexList
 
     '''
     def ConvertStringNumbersToInts(self):
@@ -126,6 +133,9 @@ class Algebra:
             return
         self.AddAndSub()
         return
+    
+    def FindBraketPairs(self):
+        self.DoseContainSymbol()
 
 
 a = Algebra("2 + 2^2 * 3 - 6 / 2")
