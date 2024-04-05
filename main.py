@@ -128,12 +128,15 @@ class Algebra:
     def FindBraketPairs(self):
         closeBraket = self.DoseContainSymbol(")")
         openBraketIndexs = self.DoseContainSymbolList("(")
-        for i in range (openBraketIndexs):
+        for i in range (len(openBraketIndexs)):
             if openBraketIndexs[i] > closeBraket:
                 openBraketIndexs.pop(i)
                 i -= 1
         openBraket = openBraketIndexs[-1]
+        print(closeBraket)
+        print(openBraket)
             
+
 
 
 
@@ -145,3 +148,10 @@ a.Exponents()
 a.MultAndDiv()
 a.AddAndSub()
 print(a.equationList)
+
+b = Algebra(" ((()))")
+b.StringToList()
+b.RemoveSpace()
+b.SplitEquation
+b.FindBraketPairs()
+print(b.equationList)
