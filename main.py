@@ -30,7 +30,7 @@ class Algebra:
         newEquationList = [""]
         for i in range(len(self.equationList)):
             for j in range(len(self.Operations)):
-                if self.equationList[i] == self.Operations[j] or self.equationList[i - 1] == self.Operations[j]:
+                if self.equationList[i] == self.Operations[j] or self.equationList[i - 1] == self.Operations[j] and i - 1 > -1:
                     newEquationList.append("")
             newEquationList[len(newEquationList) - 1] =  str(newEquationList[len(newEquationList) - 1]) + self.equationList[i]
         self.equationList = newEquationList
@@ -51,15 +51,6 @@ class Algebra:
             if self.equationList[i] == symbolToSearchFor:
                 indexList.append(i)
         return indexList
-
-    '''
-    def ConvertStringNumbersToInts(self):
-        for i in range(self.equationList):
-            for j in range(len(self.Operations) + 1):
-                if (self.equationList[i] == self.equationList):
-                    break
-                if (j == len(self.Operations)):
-    '''
 
     #Gose through the EquationList to find the first "+" and adds the values on eather side of it
     #Takes the combi ned value and replaces the 3 elements used with the new calculated value
@@ -135,13 +126,17 @@ class Algebra:
         return
     
     def FindBraketPairs(self):
-        self.DoseContainSymbol()
+        closeBraketIndex = self.DoseContainSymbol(")")
+        openBraketIndexs = self.DoseContainSymbolList("(")
 
 
-a = Algebra("2 + 2^2 * 3 - 6 / 2")
+
+a = Algebra(" 1 + 1 + 2^2 * 3 - 6 / 2 (5 + 5)")
 a.StringToList()
 a.RemoveSpace()
+print(a.equationList)
 a.SplitEquation()
+print(a.equationList)
 a.Exponents()
 a.MultAndDiv()
 a.AddAndSub()
