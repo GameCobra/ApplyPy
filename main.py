@@ -126,12 +126,13 @@ class Algebra:
         return
     
     def FindBraketPairs(self):
-        closeBraketIndex = self.DoseContainSymbol(")")
+        closeBraket = self.DoseContainSymbol(")")
         openBraketIndexs = self.DoseContainSymbolList("(")
         for i in range (openBraketIndexs):
-            if openBraketIndexs[i] > closeBraketIndex:
+            if openBraketIndexs[i] > closeBraket:
                 openBraketIndexs.pop(i)
                 i -= 1
+        openBraket = openBraketIndexs[-1]
             
 
 
