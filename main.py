@@ -128,15 +128,18 @@ class Algebra:
     def FindBraketPairs(self):
         closeBraketIndex = self.DoseContainSymbol(")")
         openBraketIndexs = self.DoseContainSymbolList("(")
+        for i in range (openBraketIndexs):
+            if openBraketIndexs[i] > closeBraketIndex:
+                openBraketIndexs.pop(i)
+                i -= 1
+            
 
 
 
 a = Algebra(" 1 + 1 + 2^2 * 3 - 6 / 2 (5 + 5)")
 a.StringToList()
 a.RemoveSpace()
-print(a.equationList)
 a.SplitEquation()
-print(a.equationList)
 a.Exponents()
 a.MultAndDiv()
 a.AddAndSub()
