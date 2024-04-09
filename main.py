@@ -1,9 +1,10 @@
 class Algebra:
-    equationList = []
     Operations = ["+", "-", "*", "/", "!", "=", "(", ")", "^"]
 
+    #initalises the class
     def __init__(self, equation: str) -> None:
         self.equation = equation
+        self.equationList = []
 
     #converts the equation atribute of the class to the equationList to allow for easyer usage latter
     #seperates each charecter in the equation to a different element in equationList
@@ -140,7 +141,7 @@ class Algebra:
 
 
 
-a = Algebra(" 1 + 1 + 2^2 * 3 - 6 / 2 (5 + 5)")
+a = Algebra(" 134 + 1 + 2^2 * 3 - 6 / 2 (5 + 5)")
 a.StringToList()
 a.RemoveSpace()
 a.SplitEquation()
@@ -153,5 +154,4 @@ b = Algebra(" ((()))")
 b.StringToList()
 b.RemoveSpace()
 b.SplitEquation
-b.FindBraketPairs()
 print(b.equationList)
