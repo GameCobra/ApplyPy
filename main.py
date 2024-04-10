@@ -32,7 +32,8 @@ class Algebra:
         for i in range(len(self.equationList)):
             for j in range(len(self.Operations)):
                 if self.equationList[i] == self.Operations[j] or self.equationList[i - 1] == self.Operations[j] and i - 1 > -1:
-                    newEquationList.append("")
+                    if i != 0:
+                        newEquationList.append("")
             newEquationList[len(newEquationList) - 1] =  str(newEquationList[len(newEquationList) - 1]) + self.equationList[i]
         self.equationList = newEquationList
 
@@ -110,6 +111,7 @@ class Algebra:
         self.MultAndDiv()
         return
     
+    #dose the addition and subtraction part of bedmas
     def AddAndSub(self):
         nextAdd = self.DoseContainSymbol("+")
         nextSub = self.DoseContainSymbol("-")
@@ -126,6 +128,7 @@ class Algebra:
         self.AddAndSub()
         return
     
+    #finds the first braket pair in the given equation
     def FindBraketPairs(self):
         closeBraket = self.DoseContainSymbol(")")
         openBraketIndexs = self.DoseContainSymbolList("(")
@@ -136,22 +139,36 @@ class Algebra:
         openBraket = openBraketIndexs[-1]
         print(closeBraket)
         print(openBraket)
+        braketEquation = []
+        for i in range(len(self.equationList)):
+            if i > openBraket and i < closeBraket:
+                braketEquation.append(self.equationList[i])
+        newEquation = Algebra(braketEquation)
+        newEquation.Bedmes()
+        
+
+    def Bedmes(self):
+        self.Exponents()
+        self.MultAndDiv()
+        self.AddAndSub()        
             
+
+            
+    #sets up the equation to be parsed by everything else
+    def SetUp(self):
+        self.StringToList()
+        self.RemoveSpace()
+        self.SplitEquation()
 
 
 
 
 a = Algebra(" 134 + 1 + 2^2 * 3 - 6 / 2 (5 + 5)")
-a.StringToList()
-a.RemoveSpace()
-a.SplitEquation()
-a.Exponents()
-a.MultAndDiv()
-a.AddAndSub()
+a.SetUp()
+a.Bedmes()
 print(a.equationList)
 
-b = Algebra(" ((()))")
-b.StringToList()
-b.RemoveSpace()
-b.SplitEquation
+b = Algebra("134 + 1 + 2^2 * 3 - 6 / 2 (5 + 5)")
+b.SetUp()
+b.FindBraketPairs()
 print(b.equationList)
