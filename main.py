@@ -90,12 +90,13 @@ class Algebra:
     #finds the first instance of "^" and dose powers on the 2 elements on either side of it
     def Exponents(self):
         Indexs = self.DoseContainSymbol("^")
-        self.equationList[Indexs] = str(float(self.equationList[Indexs - 1]) ** float(self.equationList[Indexs + 1]))
-        self.equationList.pop(Indexs + 1)
-        self.equationList.pop(Indexs - 1)
+        if Indexs != -1:
+            self.equationList[Indexs] = str(float(self.equationList[Indexs - 1]) ** float(self.equationList[Indexs + 1]))
+            self.equationList.pop(Indexs + 1)
+            self.equationList.pop(Indexs - 1)
 
     #Dose the multiplication and division portion of BEDMAS
-    def MultAndDiv(self):
+    def MultAndDiv(self):   
         nextMult = self.DoseContainSymbol("*")
         nextDiv = self.DoseContainSymbol("/")
         if nextMult == -1 and nextDiv != -1:
@@ -127,7 +128,7 @@ class Algebra:
             return
         self.AddAndSub()
         return
-    
+
     #finds the first braket pair in the given equation
     def FindBraketPairs(self):
         closeBraket = self.DoseContainSymbol(")")
@@ -144,7 +145,16 @@ class Algebra:
             if i > openBraket and i < closeBraket:
                 braketEquation.append(self.equationList[i])
         newEquation = Algebra(braketEquation)
+        newEquation.SetUp()
         newEquation.Bedmes()
+        print(newEquation.equationList)
+        while closeBraket > openBraket + 1:
+            self.equationList.pop(openBraket + 1)
+            closeBraket -= 1
+        for i in range(len(newEquation.equationList)):
+            self.equationList.insert(openBraket + 1 + i, newEquation.equationList[i])
+    
+
         
 
     def Bedmes(self):
